@@ -1,0 +1,59 @@
+body,div,ul,li {
+  margin:0px;
+  padding:0px;
+}
+.bigrect {
+  width:960px;
+  margin:0 auto;
+  margin-top:5px;
+  background:#CCC;
+}
+#header {
+  height:100px;
+}
+#nav {
+  height:35px;
+}
+#nav ul {
+  width:960px;
+  height:35px;
+}
+#nav ul li {
+  float:left;
+  list-style:none;
+  /*width:100px; 使用padding*/
+  /*padding:0 10px;*/
+  /*height:35px; 用line-height就行*/
+  line-height:35px;
+  text-align:center;
+}
+
+#nav ul li a {
+  font-size:12px;
+  color:#333;
+  text-decoration:none;
+  height:35px;
+  display:block;
+  padding:0 10px;
+}
+#nav ul li a:hover {
+  color:#fff;
+  background:#000;
+}
+#banner {
+  height:150px;
+}
+#table_banner {
+  height:150px;
+  width:960px;
+}
+.tr_banner {
+  height:50px;
+  width:960px;
+}
+#content {
+  height:1000px;
+}
+#footer {
+  height:35px;
+}
