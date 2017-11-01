@@ -15,7 +15,7 @@
 <body>
   <!-- 头 -->
   <div id="header" class="bigrect">
-    <p>header</p>
+    
   </div>
   <!-- 导航 -->
   <div id="nav" class="bigrect">
@@ -34,82 +34,81 @@
   <div id="banner" class="bigrect">
     <table id="table_banner">
       <tr class="tr_banner">
-        <td>一行一列</td>
-        <td>一行二列</td>
-        <td>一行三列</td>
-        <td>一行四列</td>
+        <td><img class="ad_img" src="./image/ad/ad_8dwww.gif" alt="一行一列" /></td>
+        <td><img class="ad_img" src="./image/ad/ad_33ip_728.gif" alt="一行二列" /></td>
+        <td><img class="ad_img" src="./image/ad/ad_51cto370.png" alt="一行三列" /></td>
+        <td><img class="ad_img" src="./image/ad/ad_ali237.jpg" alt="一行四列" /></td>
       </tr>
-      <tr>
-        <td>二行一列</td>
-        <td>二行二列</td>
-        <td>二行三列</td>
-        <td>二行四列</td>
+      <tr class="tr_banner">
+        <td><img class="ad_img" src="./image/ad/ad_edu230.png" alt="二行一列" /></td>
+        <td><img class="ad_img" src="./image/ad/ad_qy_1000.gif" alt="二行二列" /></td>
+        <td><img class="ad_img" src="./image/ad/ad_tengxunyun.gif" alt="二行三列" /></td>
+        <td><img class="ad_img" src="./image/ad/ad_tm1111.png" alt="二行四列" /></td>
       </tr>
-      <tr>
-        <td>三行一列</td>
-        <td>三行二列</td>
-        <td>三行三列</td>
-        <td>三行四列</td>
+      <tr class="tr_banner">
+        <td><img class="ad_img" src="./image/ad/ad_west263.gif" alt="三行一列" /></td>
+        <td><img class="ad_img" src="./image/ad/ad_ws237.gif" alt="三行二列" /></td>
+        <td><img class="ad_img" src="./image/ad/ad_xinghaivps.gif" alt="三行三列" /></td>
+        <td><img class="ad_img" src="./image/ad/ad_yhq-296-183.png" alt="三行四列" /></td>
       </tr>
     </table>
-    <!--
-    <div class="row">
-      <div class="col">
-        <p>一行一列</p>
-      </div>
-      <div class="col">
-        <p>一行二列</p>
-      </div>
-      <div class="col">
-        <p>一行三列</p>
-      </div>
-      <div class="col">
-        <p>一行四列</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <p>二行一列</p>
-      </div>
-      <div class="col">
-        <p>二行二列</p>
-      </div>
-      <div class="col">
-        <p>二行三列</p>
-      </div>
-      <div class="col">
-        <p>二行四列</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <p>三行一列</p>
-      </div>
-      <div class="col">
-        <p>三行二列</p>
-      </div>
-      <div class="col">
-        <p>三行三列</p>
-      </div>
-      <div class="col">
-        <p>三行四列</p>
-      </div>
-    </div>
-    -->
   </div>
   <div id="content" class="bigrect">
 		<div id="leftList">
-      <p>left article list</p>
+      <ul>
+        <li><a href="http://www.baidu.com">语文</a></li>
+        <li><a href="http://www.baidu.com">英语</a></li>
+        <li><a href="http://www.baidu.com">数学</a></li>
+        <li><a href="http://www.baidu.com">物理</a></li>
+        <li><a href="http://www.baidu.com">化学</a></li>
+        <li><a href="http://www.baidu.com">生物</a></li>
+        <li><a href="http://www.baidu.com">历史</a></li>
+        <li><a href="http://www.baidu.com">地理</a></li>
+        <li><a href="http://www.baidu.com">政治</a></li>
+      </ul>
     </div>
 		<div id="centerDoc">
-      <p>document content</p>
+      <h1>SQL ORDER BY 关键字</h1>
+      <hr>
+      <p>ORDER BY 关键字用于对结果集进行排序。</p>
+      <hr>
+      <h2>SQL ORDER BY 关键字</h2>
+      <p>ORDER BY 关键字用于对结果集按照一个列或者多个列进行排序。</p>
+      <p>ORDER BY 关键字默认按照升序对记录进行排序。如果需要按照降序对记录进行排序，您可以使用 DESC 关键字。</p>
+
+      <h3>SQL ORDER BY 语法</h3>
+<div><div>
+SELECT <em>column_name</em>,<em>column_name</em><br>
+FROM <em>table_name</em><br>
+ORDER BY <em>column_name</em>,<em>column_name</em> ASC|DESC;</div></div>
+<br><hr>
+<h2>演示数据库</h2>
+<p>在本教程中，我们将使用 RUNOOB 样本数据库。</p>
+<p>下面是选自 "Websites" 表的数据：</p>
+<pre>
++----+--------------+---------------------------+-------+---------+
+| id | name         | url                       | alexa | country |
++----+--------------+---------------------------+-------+---------+
+| 1  | Google       | https://www.google.cm/    | 1     | USA     |
+| 2  | 淘宝          | https://www.taobao.com/   | 13    | CN      |
+| 3  | 菜鸟教程      | http://www.runoob.com/    | 4689  | CN      |
+| 4  | 微博          | http://weibo.com/         | 20    | CN      |
+| 5  | Facebook     | https://www.facebook.com/ | 3     | USA     |
++----+--------------+---------------------------+-------+---------+
+</pre>
+<hr>
+
+<h2>ORDER BY 实例</h2>
+<p>下面的 SQL 语句从 "Websites" 表中选取所有网站，并按照 "alexa" 列排序：</p>
+
+
     </div>
 		<div id="rightAds">
       <p>ads</p>
     </div>
 	</div>
-	<div id="footer" class="bigrect">
-    <p>footer</p>
+	<div id="footer">
+    <p style="text-align:center">Copyright © 2013-2017 怒马教育  716ma.com All Rights Reserved.</p>
   </div>
 </body>
 </html>
