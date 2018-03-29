@@ -1,0 +1,206 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+
+<canvas id="myCanvas" width="200" height="100" style="border:1px solid #c3c3c3;">
+Your browser does not support the canvas element.
+</canvas>
+<p>
+<button id="begin">开始</button>
+<button id="suspend">暂停</button>
+<button id="stop">停止</button>
+</p>
+<p>
+得分：<input id="score" type="text" readonly="true" />
+</p>
+<script type="text/javascript">
+// 全局定义
+var POS = 5;
+var WIDTH = 200 / POS;
+var HEIGHT = 100 / POS;
+var TOTAL = WIDTH * HEIGHT / POS;
+var MISCROTIME = 250;
+
+var snake = new Array();
+var food = null;
+var DIRECTION = 0; // 0-向上 1-向下 2-向左 3-向右
+var IntervalId = null; // 定时器
+var status = -1;
+
+var canvas=document.getElementById("myCanvas");
+var cxt=canvas.getContext("2d");
+
+// 画蛇
+function drawSnake() {
+	cxt.fillStyle="#FF0000"; // 红色
+	for (var i = 0; i < snake.length; ++i) {
+	  var rect = snake[i];
+	  cxt.fillRect(rect[0] * POS, rect[1] * POS, POS, POS);
+	}
+}
+
+function inSnake(point) {
+	for (var i = 0; i < snake.length; ++i) {
+		var rect = snake[i];
+		if (rect[0] == point[0] && rect[1] == point[1])
+			return true;
+	}
+	return false;
+}
+
+// 随机一个点
+function getPoint() {
+	var x = 0, y = 0;
+	do {
+		x = parseInt(Math.random() * WIDTH);
+		y = parseInt(Math.random() * HEIGHT);
+	} while (inSnake([x,y]));
+	return [x,y];
+}
+
+// 食物
+function getFood() {
+	food = getPoint();
+	cxt.fillStyle="#00FFFF";
+	cxt.fillRect(food[0] * POS, food[1] * POS, POS, POS);
+}
+
+function keyDown(e) {
+	var key = e.keyCode ? e.keyCode : e.which;
+	switch (key) {
+	case 37:
+		DIRECTION = 2;
+		break;
+	case 38:
+		DIRECTION = 0;
+		break;
+	case 39:
+		DIRECTION = 3;
+		break;
+	case 40:
+		DIRECTION = 1;
+		break;
+	}
+}
+
+function begin() {
+	cxt.fillStyle="#FFFFFF";
+	for (var i = 0; i < snake.length; ++i) {
+	  var rect = snake[i];
+	  cxt.fillRect(rect[0] * POS, rect[1] * POS, POS, POS);
+	}
+	snake = new Array();
+	if (food) {
+		cxt.fillRect(food[0] * POS, food[1] * POS, POS, POS);
+	}
+	document.getElementById('score').value = 0;
+
+	var point = getPoint();
+	snake.unshift(point);
+	drawSnake();
+	getFood();
+	if (point[0] == HEIGHT) {
+		DIRECTION = 0;
+	} else {
+		DIRECTION = 1;
+	}
+	IntervalId = setInterval(run, MISCROTIME);
+}
+
+function run() {
+	var point = snake[0];
+	var next = [];
+	switch(DIRECTION) {
+	case 0:
+		next[0] = point[0];
+		next[1] = point[1] - 1;
+		break;
+	case 1:
+		next[0] = point[0];
+		next[1] = point[1] + 1;
+		break;
+	case 2:
+		next[0] = point[0] - 1;
+		next[1] = point[1];
+		break;
+	case 3:
+		next[0] = point[0] + 1;
+		next[1] = point[1];
+		break;
+	}
+	var over = false;
+	if (next[0] < 0 || next[0] >= WIDTH ||
+		next[1] < 0 || next[1] >= HEIGHT) {
+		var message = '撞墙了!';
+		over = true;
+	}
+	if (inSnake(next)) {
+		var message = '撞自己了!';
+		over = true;
+	}
+	if (over) {
+		clearInterval(IntervalId);
+		alert(message);
+		status = 3;
+		IntervalId = null;
+		return;
+	}
+	var eatFood = false;
+	if (next[0] == food[0] && next[1] == food[1]) {
+		eatFood = true;
+	}
+	snake.unshift(next);
+	if (eatFood == false) {
+		var point = snake.pop();
+		cxt.fillStyle="#FFFFFF";
+		cxt.fillRect(point[0] * POS, point[1] * POS, POS, POS);
+	}
+	drawSnake();
+	if (eatFood) {
+		document.getElementById('score').value = (snake.length - 1);
+		if (snake.length + 10 >= TOTAL) {
+			clearInterval(IntervalId);
+			IntervalId = null;
+			status = 3;
+			alert('非常厉害，通关结束了!');
+			return;
+		}
+		getFood();
+	}
+}
+
+window.onload = function() {
+	document.addEventListener('keydown', keyDown, false);
+	document.getElementById('score').value = 0;
+}
+
+document.getElementById('begin').onclick = function () {
+	if (status != 0 && status != 1) {
+		begin();
+		status = 0;
+	}
+}
+document.getElementById('suspend').onclick = function() {
+	if (status == 0) {
+		clearInterval(IntervalId);
+		IntervalId = null;
+		status = 1;
+		document.getElementById('suspend').innerHTML = '继续';
+	} else if (status == 1) {
+		IntervalId = setInterval(run, MISCROTIME);
+		status = 0;
+		document.getElementById('suspend').innerHTML = '暂停';
+	}
+}
+document.getElementById('stop').onclick = function() {
+	if (IntervalId) {
+		clearInterval(IntervalId);
+		IntervalId = null;
+	}
+	status = 3;
+}
+
+</script>
+
+</body>
+</html>
